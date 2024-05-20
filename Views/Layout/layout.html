@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Audible - Gestión</title>
+    <link rel="icon" href="https://juanmosquera.neocities.org/ImagenesAudible/aubible_logo.png" type="image/png">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link rel="stylesheet" href="../../stylesheet/main.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="../../Scripts/layout.js"></script>
+    <script src="../../Scripts/broadcastHandler.js" defer></script>
+    <script src="../../Scripts/cartService.js" defer></script>
+</head>
+<body>
+    <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-dark">
+        <div class="container">
+            <a href="#index" class="navbar-brand">
+                <img src="https://juanmosquera.neocities.org/ImagenesAudible/aubible_logo.png" alt="Audible Logo" style="height: 40px; width: auto; margin-right: 10px;">
+            </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon bg-dark"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item"><a class="nav-link" href="#index">Inicio</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#UIClientes">Clientes</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#UIAudios">Audios</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#UISuscripciones">Suscripciones</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#UIPagos">Pagos</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#UITipoPlan">Planes</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#UIEscuchas">Escuchas</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#secciones">Suscríbete Ahora</a></li>
+                </ul>
+            </div>
+            <a href="#cart">
+                <img src="https://juanmosquera.neocities.org/ImagenesAudible/icons8-carrito-de-compras-64.png" alt="Carrito de compras" class="carrito">
+                <span class="counter" id="nro-productos">0</span>
+            </a>
+        </div>
+    </nav>
+
+    <div class="container body-content">
+        <div id="view-content"></div>
+    </div>
+
+    <footer class="bg-dark text-white text-center mt-auto">
+        <div class="container py-3">
+            <p>&copy; <span id="current-year"></span> - Audible. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+    <script>
+        document.getElementById('current-year').textContent = new Date().getFullYear();
+
+        // Inicializar el contador del carrito en el navbar
+        function initNavbarCartCounter() {
+            const cuentaCarritoElement = document.getElementById("nro-productos");
+            const bc = new BroadcastChannel("nro-productos");
+
+            bc.onmessage = function (event) {
+                if (event.data.action === "add") {
+                    cuentaCarritoElement.innerText = event.data.count;
+                }
+            };
+
+            function actualizarCarrito() {
+                const memoria = JSON.parse(localStorage.getItem("suscripciones"));
+
+                if (memoria && memoria.length > 0) {
+                    const cuenta = memoria.reduce((acumulado, elemento) => acumulado + elemento.cantidad, 0);
+                    cuentaCarritoElement.innerText = cuenta;
+                    bc.postMessage({
+                        action: "add",
+                        count: cuenta,
+                    });
+                } else {
+                    cuentaCarritoElement.innerText = 0;
+                    bc.postMessage({
+                        action: "add",
+                        count: 0,
+                    });
+                }
+            }
+
+            actualizarCarrito();
+        }
+
+        $(document).ready(function() {
+            initNavbarCartCounter();
+        });
+    </script>
+</body>
+</html>

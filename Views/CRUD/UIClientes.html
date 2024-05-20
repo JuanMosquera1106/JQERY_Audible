@@ -1,0 +1,95 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-3 bg-light sidebar">
+            <h4 class="text-center p-3">Menú CRUD</h4>
+            <ul class="nav flex-column">
+                <li class="nav-item">
+                    <a href="#" class="nav-link active" onclick="showSection('list')">
+                        <i class="fas fa-list"></i> Listar Clientes
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link" onclick="showSection('add')">
+                        <i class="fas fa-plus-circle"></i> Añadir Cliente
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link" onclick="showSection('update')">
+                        <i class="fas fa-edit"></i> Actualizar Cliente
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link" onclick="showSection('delete')">
+                        <i class="fas fa-trash-alt"></i> Eliminar Cliente
+                    </a>
+                </li>
+            </ul>
+        </div>
+
+        <!-- Contenido Principal -->
+        <div class="col-md-9">
+            <!-- Sección Listar Clientes -->
+            <div id="list" class="content-section">
+                <h2>Listar Clientes</h2>
+                <input type="number" id="searchId" class="form-control mb-2" placeholder="Buscar por Cliente ID">
+                <button class="btn btn-primary mb-2" onclick="getClienteById()">Buscar o Mostrar Todos</button>
+                <table class="table mt-2">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Nombre</th>
+                            <th>Apellido</th>
+                            <th>País</th>
+                            <th>Email</th>
+                            <th>Estado</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody id="clienteList"></tbody>
+                </table>
+                <nav>
+                    <ul class="pagination" id="pagination"></ul>
+                </nav>
+            </div>
+
+            <!-- Sección Añadir Cliente -->
+            <div id="add" class="content-section" style="display: none;">
+                <h2>Añadir Cliente</h2>
+                <input type="text" id="addId" class="form-control mb-2" placeholder="ID del Cliente">
+                <input type="text" id="addNombre" class="form-control mb-2" placeholder="Nombre">
+                <input type="text" id="addApellido" class="form-control mb-2" placeholder="Apellido">
+                <input type="text" id="addPais" class="form-control mb-2" placeholder="País">
+                <input type="email" id="addEmail" class="form-control mb-2" placeholder="Email">
+                <select id="addEstado" class="form-control mb-2">
+                    <option value="1">Activo</option>
+                    <option value="0">Inactivo</option>
+                </select>
+                <button class="btn btn-success" onclick="addCliente()">Añadir</button>
+            </div>
+
+            <!-- Sección Actualizar Cliente -->
+            <div id="update" class="content-section" style="display: none;">
+                <h2>Actualizar Cliente</h2>
+                <input type="text" id="updateId" class="form-control mb-2" placeholder="ID del Cliente" readonly>
+                <input type="text" id="updateNombre" class="form-control mb-2" placeholder="Nombre">
+                <input type="text" id="updateApellido" class="form-control mb-2" placeholder="Apellido">
+                <input type="text" id="updatePais" class="form-control mb-2" placeholder="País">
+                <input type="email" id="updateEmail" class="form-control mb-2" placeholder="Email">
+                <select id="updateEstado" class="form-control mb-2">
+                    <option value="1">Activo</option>
+                    <option value="0">Inactivo</option>
+                </select>
+                <button class="btn btn-warning" onclick="updateCliente()">Actualizar</button>
+            </div>
+
+            <!-- Sección Eliminar Cliente -->
+            <div id="delete" class="content-section" style="display: none;">
+                <h2>Eliminar Cliente</h2>
+                <input type="text" id="deleteId" class="form-control mb-2" placeholder="ID del Cliente" readonly>
+                <button class="btn btn-danger" onclick="deleteCliente()">Eliminar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="../../Scripts/cliente.js"></script>
