@@ -7,13 +7,8 @@
     <link rel="icon" href="https://juanmosquera.neocities.org/ImagenesAudible/aubible_logo.png" type="image/png">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link rel="stylesheet" href="../../stylesheet/main.css">
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    <script src="../../Scripts/layout.js"></script>
-    <script src="../../Scripts/broadcastHandler.js" defer></script>
-    <script src="../../Scripts/cartService.js" defer></script>
 </head>
 <body>
     <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-dark">
@@ -25,21 +20,37 @@
                 <span class="navbar-toggler-icon bg-dark"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav">
+                <ul class="navbar-nav mr-auto">
                     <li class="nav-item"><a class="nav-link" href="#index">Inicio</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#UIClientes">Clientes</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#UIAudios">Audios</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#UISuscripciones">Suscripciones</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#UIPagos">Pagos</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#UITipoPlan">Planes</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#UIEscuchas">Escuchas</a></li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownCRUD" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            CRUD
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdownCRUD">
+                            <a class="dropdown-item" href="#UIClientes">Clientes</a>
+                            <a class="dropdown-item" href="#UIAudios">Audios</a>
+                            <a class="dropdown-item" href="#UISuscripciones">Suscripciones</a>
+                            <a class="dropdown-item" href="#UIPagos">Pagos</a>
+                            <a class="dropdown-item" href="#UITipoPlan">Planes</a>
+                            <a class="dropdown-item" href="#UIEscuchas">Escuchas</a>
+                        </div>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownResultados" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Resultados
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdownResultados">
+                            <a class="dropdown-item" href="#UIActividad_usuarios">Actividad Usuarios</a>
+                            <a class="dropdown-item" href="#UIAudios_mas_escuchados">Audios más escuchados</a>
+                        </div>
+                    </li>
                     <li class="nav-item"><a class="nav-link" href="#secciones">Suscríbete Ahora</a></li>
                 </ul>
+                <a href="#cart">
+                    <img src="https://juanmosquera.neocities.org/ImagenesAudible/icons8-carrito-de-compras-64.png" alt="Carrito de compras" class="carrito">
+                    <span class="counter" id="nro-productos">0</span>
+                </a>
             </div>
-            <a href="#cart">
-                <img src="https://juanmosquera.neocities.org/ImagenesAudible/icons8-carrito-de-compras-64.png" alt="Carrito de compras" class="carrito">
-                <span class="counter" id="nro-productos">0</span>
-            </a>
         </div>
     </nav>
 
@@ -53,45 +64,15 @@
         </div>
     </footer>
 
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="../../Scripts/layout.js"></script>
+    <script src="../../Scripts/broadcastHandler.js"></script>
+    <script src="../../Scripts/cartService.js"></script>
+
     <script>
         document.getElementById('current-year').textContent = new Date().getFullYear();
-
-        // Inicializar el contador del carrito en el navbar
-        function initNavbarCartCounter() {
-            const cuentaCarritoElement = document.getElementById("nro-productos");
-            const bc = new BroadcastChannel("nro-productos");
-
-            bc.onmessage = function (event) {
-                if (event.data.action === "add") {
-                    cuentaCarritoElement.innerText = event.data.count;
-                }
-            };
-
-            function actualizarCarrito() {
-                const memoria = JSON.parse(localStorage.getItem("suscripciones"));
-
-                if (memoria && memoria.length > 0) {
-                    const cuenta = memoria.reduce((acumulado, elemento) => acumulado + elemento.cantidad, 0);
-                    cuentaCarritoElement.innerText = cuenta;
-                    bc.postMessage({
-                        action: "add",
-                        count: cuenta,
-                    });
-                } else {
-                    cuentaCarritoElement.innerText = 0;
-                    bc.postMessage({
-                        action: "add",
-                        count: 0,
-                    });
-                }
-            }
-
-            actualizarCarrito();
-        }
-
-        $(document).ready(function() {
-            initNavbarCartCounter();
-        });
     </script>
 </body>
 </html>

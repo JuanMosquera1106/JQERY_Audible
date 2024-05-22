@@ -1,0 +1,41 @@
+.chart-container {
+    width: 80%;
+    margin: 30px auto;
+}
+canvas {
+    width: 75% !important;
+    height: auto !important;
+    text-align: center;
+}
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+table, th, td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+}
+th {
+    background-color: #f2f2f2;
+}
+.secondary-view {
+    padding: 20px;
+}
+.secondary-view h1 {
+    margin-bottom: 20px;
+}
+.secondary-view table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+.secondary-view table, th, td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+}
+.secondary-view th {
+    background-color: #f2f2f2;
+}

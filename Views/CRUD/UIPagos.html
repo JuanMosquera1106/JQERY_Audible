@@ -1,0 +1,95 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-3 bg-light sidebar">
+            <h4 class="text-center p-3">Menú CRUD</h4>
+            <ul class="nav flex-column">
+                <li class="nav-item">
+                    <a href="#" class="nav-link active" onclick="showSection('list')">
+                        <i class="fas fa-list"></i> Listar Pagos
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link" onclick="showSection('add')">
+                        <i class="fas fa-plus-circle"></i> Añadir Pago
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link" onclick="showSection('update')">
+                        <i class="fas fa-edit"></i> Actualizar Pago
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link" onclick="showSection('delete')">
+                        <i class="fas fa-trash-alt"></i> Eliminar Pago
+                    </a>
+                </li>
+            </ul>
+        </div>
+
+        <div class="col-md-9">
+            <div id="list" class="content-section">
+                <h2>Listar Pagos</h2>
+                <input type="number" id="searchId" class="form-control mb-2" placeholder="Buscar por Pago ID">
+                <button class="btn btn-primary mb-2" onclick="getPagoById()">Buscar o Mostrar Todos</button>
+                <table class="table mt-2">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Cliente</th>
+                            <th>Código</th>
+                            <th>Tipo</th>
+                            <th>Monto</th>
+                            <th>Fecha</th>
+                            <th>Pendiente</th>
+                            <th>Estado</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody id="pagoList"></tbody>
+                </table>
+                <nav>
+                    <ul class="pagination" id="pagination"></ul>
+                </nav>
+            </div>
+
+            <div id="add" class="content-section" style="display: none;">
+                <h2>Añadir Pago</h2>
+                <select id="addClienteId" class="form-control mb-2"></select>
+                <input type="text" id="addCodigo" class="form-control mb-2" placeholder="Código">
+                <input type="text" id="addTipo" class="form-control mb-2" placeholder="Tipo">
+                <input type="number" id="addMonto" class="form-control mb-2" placeholder="Monto">
+                <input type="datetime-local" id="addFecha" class="form-control mb-2">
+                <input type="text" id="addPendiente" class="form-control mb-2" placeholder="Pendiente">
+                <select id="addEstado" class="form-control mb-2">
+                    <option value="1">Activo</option>
+                    <option value="0">Inactivo</option>
+                </select>
+                <button class="btn btn-success" onclick="addPago()">Añadir</button>
+            </div>
+
+            <div id="update" class="content-section" style="display: none;">
+                <h2>Actualizar Pago</h2>
+                <input type="text" id="updateId" class="form-control mb-2" placeholder="ID del Pago" readonly>
+                <select id="updateClienteId" class="form-control mb-2"></select>
+                <input type="text" id="updateCodigo" class="form-control mb-2" placeholder="Código">
+                <input type="text" id="updateTipo" class="form-control mb-2" placeholder="Tipo">
+                <input type="number" id="updateMonto" class="form-control mb-2" placeholder="Monto">
+                <input type="datetime-local" id="updateFecha" class="form-control mb-2">
+                <input type="text" id="updatePendiente" class="form-control mb-2" placeholder="Pendiente">
+                <select id="updateEstado" class="form-control mb-2">
+                    <option value="1">Activo</option>
+                    <option value="0">Inactivo</option>
+                </select>
+                <button class="btn btn-warning" onclick="updatePago()">Actualizar</button>
+            </div>
+
+            <div id="delete" class="content-section" style="display: none;">
+                <h2>Eliminar Pago</h2>
+                <input type="text" id="deleteId" class="form-control mb-2" placeholder="ID del Pago" readonly>
+                <button class="btn btn-danger" onclick="deletePago()">Eliminar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="../../Scripts/pago.js"></script>

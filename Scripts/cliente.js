@@ -15,10 +15,10 @@ function displayClientes(page) {
 
     $('#clienteList').empty();
     paginatedItems.forEach(function (cliente) {
-        $('#clienteList').append('<tr><td>' + cliente.cli_ID + '</td><td>' + cliente.cli_NOMBRE + '</td><td>' + cliente.cli_APELLIDO + '</td><td>' + cliente.cli_PAIS + '</td><td>' + cliente.cli_EMAIL + '</td><td>' + (cliente.cli_ESTADO ? 'Activo' : 'Inactivo') + '</td><td>' +
-            '<button class="btn btn-info btn-sm" onclick="viewCliente(\'' + cliente.cli_ID + '\')">Ver</button> ' +
-            '<button class="btn btn-warning btn-sm" onclick="loadUpdateForm(\'' + cliente.cli_ID + '\')">Actualizar</button> ' +
-            '<button class="btn btn-danger btn-sm" onclick="loadDeleteForm(\'' + cliente.cli_ID + '\')">Eliminar</button>' +
+        $('#clienteList').append('<tr><td>' + cliente.CLI_ID + '</td><td>' + cliente.CLI_NOMBRE + '</td><td>' + cliente.CLI_APELLIDO + '</td><td>' + cliente.CLI_PAIS + '</td><td>' + cliente.CLI_EMAIL + '</td><td>' + (cliente.CLI_ESTADO ? 'Activo' : 'Inactivo') + '</td><td>' +
+            '<button class="btn btn-info btn-sm" onclick="viewCliente(\'' + cliente.CLI_ID + '\')">Ver</button> ' +
+            '<button class="btn btn-warning btn-sm" onclick="loadUpdateForm(\'' + cliente.CLI_ID + '\')">Actualizar</button> ' +
+            '<button class="btn btn-danger btn-sm" onclick="loadDeleteForm(\'' + cliente.CLI_ID + '\')">Eliminar</button>' +
             '</td></tr>');
     });
 
@@ -39,7 +39,7 @@ function setupPagination(totalItems, currentPage) {
 // Función para obtener los clientes desde el servidor
 function getClientes() {
     $.ajax({
-        url: 'http://localhost:4000/cliente',
+        url: 'https://localhost:44346/api/cliente/Listar',
         type: 'GET',
         success: function (data) {
             console.log(data); // Añade esto para ver los datos en la consola
@@ -64,7 +64,7 @@ function getClienteById() {
         getClientes();
         return;
     }
-    $.get('http://localhost:4000/cliente/' + id, function (data) {
+    $.get('https://localhost:44346/api/cliente/leer' + id, function (data) {
         currentClientes = [data];
         displayClientes(1);
     }).fail(function () {
@@ -86,16 +86,16 @@ function addCliente() {
     }
 
     $.ajax({
-        url: "http://localhost:4000/cliente",
+        url: "https://localhost:44346/api/cliente/Insertar",
         type: "POST",
         contentType: "application/json",
         data: JSON.stringify({
-            cli_ID: id,
-            cli_NOMBRE: nombre,
-            cli_APELLIDO: apellido,
-            cli_PAIS: pais,
-            cli_EMAIL: email,
-            cli_ESTADO: estado
+            CLI_ID: id,
+            CLI_NOMBRE: nombre,
+            CLI_APELLIDO: apellido,
+            CLI_PAIS: pais,
+            CLI_EMAIL: email,
+            CLI_ESTADO: estado
         }),
         success: function (data) {
             alert('Cliente agregado correctamente');
@@ -115,29 +115,29 @@ function addCliente() {
 }
 
 function viewCliente(id) {
-    const cliente = currentClientes.find(c => c.cli_ID === id);
+    const cliente = currentClientes.find(c => c.CLI_ID === id);
     if (cliente) {
-        alert('ID: ' + cliente.cli_ID + '\nNombre: ' + cliente.cli_NOMBRE + '\nApellido: ' + cliente.cli_APELLIDO + '\nPaís: ' + cliente.cli_PAIS + '\nEmail: ' + cliente.cli_EMAIL + '\nEstado: ' + (cliente.cli_ESTADO ? 'Activo' : 'Inactivo'));
+        alert('ID: ' + cliente.CLI_ID + '\nNombre: ' + cliente.CLI_NOMBRE + '\nApellido: ' + cliente.CLI_APELLIDO + '\nPaís: ' + cliente.CLI_PAIS + '\nEmail: ' + cliente.CLI_EMAIL + '\nEstado: ' + (cliente.CLI_ESTADO ? 'Activo' : 'Inactivo'));
     }
 }
 
 function loadUpdateForm(id) {
-    const cliente = currentClientes.find(c => c.cli_ID === id);
+    const cliente = currentClientes.find(c => c.CLI_ID === id);
     if (cliente) {
-        $('#updateId').val(cliente.cli_ID);
-        $('#updateNombre').val(cliente.cli_NOMBRE);
-        $('#updateApellido').val(cliente.cli_APELLIDO);
-        $('#updatePais').val(cliente.cli_PAIS);
-        $('#updateEmail').val(cliente.cli_EMAIL);
-        $('#updateEstado').val(cliente.cli_ESTADO ? '1' : '0');
+        $('#updateId').val(cliente.CLI_ID);
+        $('#updateNombre').val(cliente.CLI_NOMBRE);
+        $('#updateApellido').val(cliente.CLI_APELLIDO);
+        $('#updatePais').val(cliente.CLI_PAIS);
+        $('#updateEmail').val(cliente.CLI_EMAIL);
+        $('#updateEstado').val(cliente.CLI_ESTADO ? '1' : '0');
         showSection('update');
     }
 }
 
 function loadDeleteForm(id) {
-    const cliente = currentClientes.find(c => c.cli_ID === id);
+    const cliente = currentClientes.find(c => c.CLI_ID === id);
     if (cliente) {
-        $('#deleteId').val(cliente.cli_ID);
+        $('#deleteId').val(cliente.CLI_ID);
         showSection('delete');
     }
 }
@@ -156,14 +156,15 @@ function updateCliente() {
     }
 
     $.ajax({
-        url: 'http://localhost:4000/cliente/' + id,
+        url: 'https://localhost:44346/api/cliente/Actualizar',
         method: "PUT",
         data: JSON.stringify({
-            cli_NOMBRE: nombre,
-            cli_APELLIDO: apellido,
-            cli_PAIS: pais,
-            cli_EMAIL: email,
-            cli_ESTADO: estado
+            CLI_ID: id,
+            CLI_NOMBRE: nombre,
+            CLI_APELLIDO: apellido,
+            CLI_PAIS: pais,
+            CLI_EMAIL: email,
+            CLI_ESTADO: estado
         }),
         contentType: "application/json",
         success: function (result) {
@@ -185,7 +186,7 @@ function deleteCliente() {
         return;
     }
     $.ajax({
-        url: 'http://localhost:4000/cliente/' + id,
+        url: 'https://localhost:44346/api/cliente/Eliminar' + id,
         method: 'DELETE',
         success: function (result) {
             alert("Cliente eliminado con éxito");
