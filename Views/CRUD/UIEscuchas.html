@@ -1,0 +1,86 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-3 bg-light sidebar">
+            <h4 class="text-center p-3">Menú CRUD</h4>
+            <ul class="nav flex-column">
+                <li class="nav-item">
+                    <a href="#" class="nav-link active" onclick="showSection('list')">
+                        <i class="fas fa-list"></i> Listar Escuchas
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link" onclick="showSection('add')">
+                        <i class="fas fa-plus-circle"></i> Añadir Escucha
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link" onclick="showSection('update')">
+                        <i class="fas fa-edit"></i> Actualizar Escucha
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link" onclick="showSection('delete')">
+                        <i class="fas fa-trash-alt"></i> Eliminar Escucha
+                    </a>
+                </li>
+            </ul>
+        </div>
+
+        <div class="col-md-9">
+            <div id="list" class="content-section">
+                <h2>Listar Escuchas</h2>
+                <input type="number" id="searchId" class="form-control mb-2" placeholder="Buscar por Escucha ID">
+                <button class="btn btn-primary mb-2" onclick="getEscuchaById()">Buscar o Mostrar Todos</button>
+                <table class="table mt-2">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Cliente</th>
+                            <th>Audio</th>
+                            <th>Fecha</th>
+                            <th>Estado</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody id="escuchaList"></tbody>
+                </table>
+                <nav>
+                    <ul class="pagination" id="pagination"></ul>
+                </nav>
+            </div>
+
+            <div id="add" class="content-section" style="display: none;">
+                <h2>Añadir Escucha</h2>
+                <select id="addClienteId" class="form-control mb-2"></select>
+                <select id="addAudioId" class="form-control mb-2"></select>
+                <input type="datetime-local" id="addFecha" class="form-control mb-2">
+                <select id="addEstado" class="form-control mb-2">
+                    <option value="1">Activo</option>
+                    <option value="0">Inactivo</option>
+                </select>
+                <button class="btn btn-success" onclick="addEscucha()">Añadir</button>
+            </div>
+
+            <div id="update" class="content-section" style="display: none;">
+                <h2>Actualizar Escucha</h2>
+                <input type="text" id="updateId" class="form-control mb-2" placeholder="ID de la Escucha" readonly>
+                <select id="updateClienteId" class="form-control mb-2"></select>
+                <select id="updateAudioId" class="form-control mb-2"></select>
+                <input type="datetime-local" id="updateFecha" class="form-control mb-2">
+                <select id="updateEstado" class="form-control mb-2">
+                    <option value="1">Activo</option>
+                    <option value="0">Inactivo</option>
+                </select>
+                <button class="btn btn-warning" onclick="updateEscucha()">Actualizar</button>
+            </div>
+
+            <div id="delete" class="content-section" style="display: none;">
+                <h2>Eliminar Escucha</h2>
+                <input type="text" id="deleteId" class="form-control mb-2" placeholder="ID de la Escucha" readonly>
+                <button class="btn btn-danger" onclick="deleteEscucha()">Eliminar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="../../Scripts/escucha.js"></script>

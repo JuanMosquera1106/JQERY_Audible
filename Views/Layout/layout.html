@@ -8,12 +8,6 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <link rel="stylesheet" href="../../stylesheet/main.css">
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    <script src="../../Scripts/layout.js"></script>
-    <script src="../../Scripts/broadcastHandler.js" defer></script>
-    <script src="../../Scripts/cartService.js" defer></script>
 </head>
 <body>
     <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-dark">
@@ -53,45 +47,15 @@
         </div>
     </footer>
 
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="../../Scripts/layout.js"></script>
+    <script src="../../Scripts/broadcastHandler.js"></script>
+    <script src="../../Scripts/cartService.js"></script>
+
     <script>
         document.getElementById('current-year').textContent = new Date().getFullYear();
-
-        // Inicializar el contador del carrito en el navbar
-        function initNavbarCartCounter() {
-            const cuentaCarritoElement = document.getElementById("nro-productos");
-            const bc = new BroadcastChannel("nro-productos");
-
-            bc.onmessage = function (event) {
-                if (event.data.action === "add") {
-                    cuentaCarritoElement.innerText = event.data.count;
-                }
-            };
-
-            function actualizarCarrito() {
-                const memoria = JSON.parse(localStorage.getItem("suscripciones"));
-
-                if (memoria && memoria.length > 0) {
-                    const cuenta = memoria.reduce((acumulado, elemento) => acumulado + elemento.cantidad, 0);
-                    cuentaCarritoElement.innerText = cuenta;
-                    bc.postMessage({
-                        action: "add",
-                        count: cuenta,
-                    });
-                } else {
-                    cuentaCarritoElement.innerText = 0;
-                    bc.postMessage({
-                        action: "add",
-                        count: 0,
-                    });
-                }
-            }
-
-            actualizarCarrito();
-        }
-
-        $(document).ready(function() {
-            initNavbarCartCounter();
-        });
     </script>
 </body>
 </html>

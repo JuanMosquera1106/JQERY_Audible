@@ -1,7 +1,7 @@
 const cuentaCarritoElement = document.getElementById("nro-productos");
 const bc = new BroadcastChannel("nro-productos");
 
-bc.onmessage = function (event) {
+bc.onmessage = function(event) {
     if (event.data.action === "add") {
         // Actualizar el contador del carrito
         cuentaCarritoElement.innerText = event.data.count;
@@ -19,3 +19,6 @@ bc.onmessage = function (event) {
         }
     }
 };
+
+// Llamar a actualizarCarrito al cargar el script
+actualizarCarrito();

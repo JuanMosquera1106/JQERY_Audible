@@ -1,0 +1,86 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-3 bg-light sidebar">
+            <h4 class="text-center p-3">Menú CRUD</h4>
+            <ul class="nav flex-column">
+                <li class="nav-item">
+                    <a href="#" class="nav-link active" onclick="showSection('list')">
+                        <i class="fas fa-list"></i> Listar Tipo de Plan
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link" onclick="showSection('add')">
+                        <i class="fas fa-plus-circle"></i> Añadir Tipo de Plan
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link" onclick="showSection('update')">
+                        <i class="fas fa-edit"></i> Actualizar Tipo de Plan
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link" onclick="showSection('delete')">
+                        <i class="fas fa-trash-alt"></i> Eliminar Tipo de Plan
+                    </a>
+                </li>
+            </ul>
+        </div>
+
+        <div class="col-md-9">
+            <div id="list" class="content-section">
+                <h2>Listar Tipo de Plan</h2>
+                <input type="number" id="searchId" class="form-control mb-2" placeholder="Buscar por TipoPlan ID">
+                <button class="btn btn-primary mb-2" onclick="getTipoPlanById()">Buscar o Mostrar Todos</button>
+                <table class="table mt-2">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Nombre</th>
+                            <th>Duración</th>
+                            <th>Precio</th>
+                            <th>Estado</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tipoPlanList"></tbody>
+                </table>
+                <nav>
+                    <ul class="pagination" id="pagination"></ul>
+                </nav>
+            </div>
+
+            <div id="add" class="content-section" style="display: none;">
+                <h2>Añadir Tipo de Plan</h2>
+                <input type="text" id="addNombre" class="form-control mb-2" placeholder="Nombre">
+                <input type="text" id="addDuracion" class="form-control mb-2" placeholder="Duración">
+                <input type="number" id="addPrecio" class="form-control mb-2" placeholder="Precio">
+                <select id="addEstado" class="form-control mb-2">
+                    <option value="1">Activo</option>
+                    <option value="0">Inactivo</option>
+                </select>
+                <button class="btn btn-success" onclick="addTipoPlan()">Añadir</button>
+            </div>
+
+            <div id="update" class="content-section" style="display: none;">
+                <h2>Actualizar Tipo de Plan</h2>
+                <input type="text" id="updateId" class="form-control mb-2" placeholder="ID del TipoPlan" readonly>
+                <input type="text" id="updateNombre" class="form-control mb-2" placeholder="Nombre">
+                <input type="text" id="updateDuracion" class="form-control mb-2" placeholder="Duración">
+                <input type="number" id="updatePrecio" class="form-control mb-2" placeholder="Precio">
+                <select id="updateEstado" class="form-control mb-2">
+                    <option value="1">Activo</option>
+                    <option value="0">Inactivo</option>
+                </select>
+                <button class="btn btn-warning" onclick="updateTipoPlan()">Actualizar</button>
+            </div>
+
+            <div id="delete" class="content-section" style="display: none;">
+                <h2>Eliminar Tipo de Plan</h2>
+                <input type="text" id="deleteId" class="form-control mb-2" placeholder="ID del TipoPlan" readonly>
+                <button class="btn btn-danger" onclick="deleteTipoPlan()">Eliminar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="../../Scripts/tipoPlan.js"></script>
