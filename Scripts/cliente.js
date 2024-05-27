@@ -5,7 +5,7 @@ function showSection(sectionId) {
 
 var currentClientes = [];
 var currentPage = 1;
-var rowsPerPage = 5;
+var rowsPerPage = 20;
 
 // Función para mostrar clientes paginados
 function displayClientes(page) {
@@ -187,7 +187,8 @@ function deleteCliente() {
     }
     $.ajax({
         url: 'https://localhost:44346/api/cliente/Eliminar' + id,
-        method: 'DELETE',
+        method: 'PUT',
+        contentType: "application/json",
         success: function (result) {
             alert("Cliente eliminado con éxito");
             getClientes(); // Recargar lista de clientes

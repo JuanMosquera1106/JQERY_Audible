@@ -5,7 +5,7 @@ function showSection(sectionId) {
 
 var currentTipoPlanes = [];
 var currentPage = 1;
-var rowsPerPage = 5;
+var rowsPerPage = 20;
 
 function showSection(sectionId) {
     $('.content-section').hide();
@@ -182,7 +182,8 @@ function deleteTipoPlan() {
     }
     $.ajax({
         url: 'https://localhost:44346/api/TipoPlan/Eliminar/' + id,
-        method: 'DELETE',
+        method: 'PUT',
+        contentType: "application/json",
         success: function (result) {
             alert("TipoPlan eliminado con éxito");
             getTipoPlanes();

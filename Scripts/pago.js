@@ -6,7 +6,7 @@ function showSection(sectionId) {
 var currentPagos = [];
 var currentClientes = [];
 var currentPage = 1;
-var rowsPerPage = 5;
+var rowsPerPage = 20;
 
 function showSection(sectionId) {
     $('.content-section').hide();
@@ -231,7 +231,8 @@ function deletePago() {
     }
     $.ajax({
         url: 'https://localhost:44346/api/Pago/Eliminar/' + id,
-        method: 'DELETE',
+        method: 'PUT',
+        contentType: "application/json",
         success: function (result) {
             alert("Pago eliminado con éxito");
             getPagos();

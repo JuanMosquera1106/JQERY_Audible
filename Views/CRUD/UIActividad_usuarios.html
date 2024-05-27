@@ -1,25 +1,29 @@
-<link rel="stylesheet" href="../../stylesheet/actividad_usuarios.css">
-<div class="container body-content">
-    <div id="view-content">
-        <div class="secondary-view">
-            <h1>Informe de Pagos de Usuarios</h1>
-            <table id="actividadUsuariosTable">
-                <thead>
-                    <tr>
-                        <th>Cédula</th>
-                        <th>Nombre</th>
-                        <th>Apellido</th>
-                        <th>Email</th>
-                        <th>Número de Pagos</th>
-                    </tr>            
-                </thead>
-                <tbody>
-                </tbody>
-            </table>
-            <div class="chart-container">
-                <canvas id="actividadUsuariosChart" width="400" height="200"></canvas>
+    <link rel="stylesheet" href="../../stylesheet/actividad_usuarios.css">
+    <div class="container body-content">
+        <div id="view-content">
+            <div class="secondary-view">
+                <h1>Informe de Pagos de Usuarios</h1>
+                <table id="actividadUsuariosTable" class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Cédula</th>
+                            <th>Nombre</th>
+                            <th>Apellido</th>
+                            <th>Email</th>
+                            <th>Número de Pagos</th>
+                        </tr>            
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+                <nav>
+                    <ul class="pagination" id="pagination"></ul>
+                </nav>
+                <div class="chart-container">
+                    <canvas id="actividadUsuariosChart" width="400" height="200"></canvas>
+                </div>
             </div>
         </div>
     </div>
-</div>
-<script src="../../Scripts/sp_actividadUsuarios.js"></script>
+    <script src="../../Scripts/sp_actividadUsuarios.js"></script>
+

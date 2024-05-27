@@ -7,7 +7,7 @@ var currentEscuchas = [];
 var currentClientes = [];
 var currentAudios = [];
 var currentPage = 1;
-var rowsPerPage = 5;
+var rowsPerPage = 20;
 
 function showSection(sectionId) {
     $('.content-section').hide();
@@ -241,7 +241,8 @@ function deleteEscucha() {
     }
     $.ajax({
         url: 'https://localhost:44346/api/Escucha/Eliminar/' + id,
-        method: 'DELETE',
+        method: 'PUT',
+        contentType: "application/json",
         success: function (result) {
             alert("Escucha eliminada con éxito");
             getEscuchas();

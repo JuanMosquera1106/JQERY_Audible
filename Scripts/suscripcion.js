@@ -7,7 +7,7 @@ var currentSuscripciones = [];
 var currentClientes = [];
 var currentTipoPlanes = [];
 var currentPage = 1;
-var rowsPerPage = 5;
+var rowsPerPage = 20;
 
 function showSection(sectionId) {
     $('.content-section').hide();
@@ -253,7 +253,8 @@ function deleteSuscripcion() {
     }
     $.ajax({
         url: 'https://localhost:44346/api/Suscripcion/Eliminar/' + id,
-        method: 'DELETE',
+        method: 'PUT',
+        contentType: "application/json",
         success: function (result) {
             alert("Suscripción eliminada con éxito");
             getSuscripciones();

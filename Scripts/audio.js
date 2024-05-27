@@ -186,9 +186,11 @@ function deleteAudio() {
         alert('Por favor, proporcione un ID');
         return;
     }
+
     $.ajax({
         url: 'https://localhost:44346/api/Audio/Eliminar/' + id,
-        method: 'DELETE',
+        method: 'PUT', // Change to PUT method
+        contentType: "application/json",
         success: function (result) {
             alert("Audio eliminado con éxito");
             getAudios();

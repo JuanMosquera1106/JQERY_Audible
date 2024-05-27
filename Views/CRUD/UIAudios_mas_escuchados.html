@@ -3,7 +3,7 @@
     <div id="view-content">
         <div class="secondary-view">
             <h1>Audios Más Escuchados</h1>
-            <table id="audiosMasEscuchadosTable">
+            <table id="audiosMasEscuchadosTable" class="table table-striped">
                 <thead>
                     <tr>
                         <th>ID</th>
@@ -12,9 +12,11 @@
                         <th>Veces Escuchado</th>
                     </tr>            
                 </thead>
-                <tbody>
-                </tbody>
+                <tbody></tbody>
             </table>
+            <nav>
+                <ul class="pagination" id="pagination"></ul>
+            </nav>
             <div class="chart-container">
                 <canvas id="audiosMasEscuchadosChart" width="400" height="200"></canvas>
             </div>
@@ -22,3 +24,4 @@
     </div>
 </div>
 <script src="../../Scripts/comprarAction.js"></script>
+<script src="../../Scripts/audios_mas_escuchados.js"></script>
